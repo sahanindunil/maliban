@@ -1,0 +1,1466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maliban M365 Copilot Session Trainer Playbook</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        malibanBlue: '#003399',
+                        malibanGold: '#F5B041',
+                        malibanLightBg: '#F4F6F9',
+                        malibanDarkSlate: '#1E293B',
+                        teamsPurple: '#6264A7',
+                        teamsChatBg: '#F3F2F1'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .scrollbar-thin::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .scrollbar-thin::-webkit-scrollbar-track {
+            background: #F1F5F9;
+        }
+        .scrollbar-thin::-webkit-scrollbar-thumb {
+            background: #CBD5E1;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col antialiased">
+
+    <!-- TOP HEADER BAR -->
+    <header class="bg-gradient-to-r from-malibanBlue to-blue-900 text-white shadow-lg border-b-4 border-malibanGold px-6 py-4 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-4">
+                <div class="bg-white p-2 rounded-lg shadow-inner flex items-center justify-center">
+                    <svg class="w-10 h-10 text-malibanBlue" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2L2 22h20L12 2zm0 3.99L19.53 19H4.47L12 5.99zM11 10v4h2v-4h-2zm0 6v2h2v-2h-2z"/>
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="text-xl md:text-2xl font-black tracking-tight flex items-center gap-2">
+                        MALIBAN <span class="text-malibanGold">M365 COPILOT</span>
+                    </h1>
+                    <p class="text-xs text-blue-200 uppercase tracking-widest font-semibold">Executive & Management Training Playbook</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <div class="text-right">
+                    <p class="text-xs text-blue-300 font-medium">Session Status</p>
+                    <p class="text-sm font-bold text-emerald-400 flex items-center gap-1">
+                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span> Active Agent-Grade Training Mode
+                    </p>
+                </div>
+                <div class="h-8 w-[1px] bg-blue-700"></div>
+                <div class="bg-blue-950/50 px-3 py-1.5 rounded-md border border-blue-800 text-xs">
+                    <span class="text-blue-300 font-bold">Scope:</span> 4 Hours (11:15 AM - 4:15 PM)
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- TOAST NOTIFICATION CONTAINER -->
+    <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+        <div class="bg-slate-900 text-white px-4 py-3 rounded-lg shadow-2xl border border-slate-700 flex items-center gap-3">
+            <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            <span id="toast-text" class="text-sm font-medium">Copied successfully!</span>
+        </div>
+    </div>
+
+    <!-- MAIN GRID CONTAINER -->
+    <div class="max-w-7xl mx-auto w-full px-4 py-6 grid grid-cols-1 lg:grid-cols-12 gap-6 flex-grow">
+        
+        <!-- LEFT COLUMN: TIME NAVIGATION & ARR CALCULATOR (lg:col-span-4) -->
+        <div class="lg:col-span-4 flex flex-col gap-6">
+            
+            <!-- MASTER PROGRESS TRACKER -->
+            <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100">
+                <h2 class="text-xs uppercase font-bold tracking-wider text-slate-400 mb-3">Overall Progress</h2>
+                <div class="w-full bg-slate-100 rounded-full h-3 mb-4 overflow-hidden">
+                    <div id="progress-bar" class="bg-gradient-to-r from-malibanBlue to-blue-600 h-full transition-all duration-500" style="width: 12.5%;"></div>
+                </div>
+                <div class="flex justify-between items-center text-xs text-slate-500">
+                    <span id="progress-text">Module 1 of 8</span>
+                    <span id="progress-percentage">12.5% Completed</span>
+                </div>
+            </div>
+
+            <!-- THE ARR EVALUATOR PANEL (INCORPORATING VIDEO SEGMENT 1) -->
+            <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100">
+                <div class="flex justify-between items-center mb-2 pb-1.5 border-b border-slate-100">
+                    <h3 class="text-xs uppercase font-bold tracking-wider text-slate-500">The ARR Evaluator</h3>
+                    <span class="text-[9px] font-bold px-2 py-0.5 rounded bg-blue-50 text-malibanBlue">Framework</span>
+                </div>
+                <p class="text-[11px] text-slate-500 mb-3 leading-tight">
+                    Evaluate any Maliban operational task to determine if it is ready for an autonomous <strong>Agent</strong> or a standard <strong>Prompt</strong>:
+                </p>
+                <div class="space-y-2">
+                    <label class="flex items-center gap-2 text-xs text-slate-700 cursor-pointer">
+                        <input type="checkbox" id="arr-autonomous" onchange="runArrEvaluation()" class="rounded text-malibanBlue focus:ring-malibanBlue w-4 h-4">
+                        <span><strong>Autonomous:</strong> Executable without live handholding</span>
+                    </label>
+                    <label class="flex items-center gap-2 text-xs text-slate-700 cursor-pointer">
+                        <input type="checkbox" id="arr-recurring" onchange="runArrEvaluation()" class="rounded text-malibanBlue focus:ring-malibanBlue w-4 h-4">
+                        <span><strong>Recurring:</strong> Scheduled hourly/daily/weekly</span>
+                    </label>
+                    <label class="flex items-center gap-2 text-xs text-slate-700 cursor-pointer">
+                        <input type="checkbox" id="arr-reviewable" onchange="runArrEvaluation()" class="rounded text-malibanBlue focus:ring-malibanBlue w-4 h-4">
+                        <span><strong>Reviewable:</strong> Output matches clear, measurable SOPs</span>
+                    </label>
+                </div>
+                <div class="mt-4 p-3 rounded-xl text-center transition-all duration-350" id="arr-output-box" class="bg-slate-50">
+                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">A.R.R. Score Result</p>
+                    <p id="arr-result-status" class="text-sm font-black text-slate-700 mt-1">Select boxes to evaluate</p>
+                    <p id="arr-result-desc" class="text-[10px] text-slate-500 mt-1 leading-snug">Test tasks like "Distributor credit monitoring" or "Weekly wastage audits" above.</p>
+                </div>
+            </div>
+
+            <!-- TIMELINE NAVIGATION ITEMS -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
+                <div class="p-4 bg-slate-50 border-b border-slate-100 flex justify-between items-center">
+                    <span class="font-bold text-xs uppercase tracking-wider text-slate-500">Chronological Runbook</span>
+                    <span class="text-xs font-semibold text-malibanBlue bg-blue-50 px-2.5 py-0.5 rounded-full">Interactive</span>
+                </div>
+                
+                <nav id="timeline-nav" class="divide-y divide-slate-100 overflow-y-auto max-h-[350px] scrollbar-thin">
+                    <!-- Step 1 -->
+                    <button onclick="switchTab(1)" class="w-full text-left p-4 hover:bg-slate-50 transition-colors duration-150 flex gap-3 block-btn active-block" id="nav-1">
+                        <div class="flex flex-col items-center">
+                            <span class="w-8 h-8 rounded-full bg-blue-100 text-malibanBlue font-bold flex items-center justify-center text-xs tracking-tight">11:15</span>
+                            <div class="w-[2px] h-full bg-slate-200 mt-2"></div>
+                        </div>
+                        <div class="flex-grow pt-1">
+                            <h3 class="font-bold text-sm text-slate-800 leading-tight">The Science of AI Orchestration</h3>
+                            <p class="text-xs text-slate-500 mt-0.5">The Intern Metaphor & GCSE Framework</p>
+                            <span class="inline-block mt-2 text-[10px] font-bold px-2 py-0.5 rounded-md bg-blue-50 text-malibanBlue border border-blue-100">Theory + Frameworks</span>
+                        </div>
+                    </button>
+
+                    <!-- Step 2 -->
+                    <button onclick="switchTab(2)" class="w-full text-left p-4 hover:bg-slate-50 transition-colors duration-150 flex gap-3 block-btn" id="nav-2">
+                        <div class="flex flex-col items-center">
+                            <span class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 font-bold flex items-center justify-center text-xs tracking-tight">11:45</span>
+                            <div class="w-[2px] h-full bg-slate-200 mt-2"></div>
+                        </div>
+                        <div class="flex-grow pt-1">
+                            <h3 class="font-bold text-sm text-slate-700 leading-tight">Outlook: Tame the Inbox</h3>
+                            <p class="text-xs text-slate-500 mt-0.5">Thread Summarization & Tone Coaching</p>
+                            <span class="inline-block mt-2 text-[10px] font-bold px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-700 border border-emerald-100">Live Demo</span>
+                        </div>
+                    </button>
+
+                    <!-- Step 3 -->
+                    <button onclick="switchTab(3)" class="w-full text-left p-4 hover:bg-slate-50 transition-colors duration-150 flex gap-3 block-btn" id="nav-3">
+                        <div class="flex flex-col items-center">
+                            <span class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 font-bold flex items-center justify-center text-xs tracking-tight">12:30</span>
+                            <div class="w-[2px] h-full bg-slate-200 mt-2"></div>
+                        </div>
+                        <div class="flex-grow pt-1">
+                            <h3 class="font-bold text-sm text-slate-700 leading-tight">Word: Intellectual Splicing</h3>
+                            <p class="text-xs text-slate-500 mt-0.5">Grounded Proposals & Redrafting</p>
+                            <span class="inline-block mt-2 text-[10px] font-bold px-2 py-0.5 rounded-md bg-indigo-50 text-indigo-700 border border-indigo-100">Live Demo</span>
+                        </div>
+                    </button>
+
+                    <!-- Step 4 (Lunch) -->
+                    <button onclick="switchTab(4)" class="w-full text-left p-4 hover:bg-slate-50 transition-colors duration-150 flex gap-3 block-btn bg-amber-50/50" id="nav-4">
+                        <div class="flex flex-col items-center">
+                            <span class="w-8 h-8 rounded-full bg-amber-100 text-amber-700 font-bold flex items-center justify-center text-xs tracking-tight">01:15</span>
+                            <div class="w-[2px] h-full bg-slate-200 mt-2"></div>
+                        </div>
+                        <div class="flex-grow pt-1">
+                            <h3 class="font-bold text-sm text-amber-800 leading-tight">LUNCH BREAK (1 Hour)</h3>
+                            <p class="text-xs text-amber-600 mt-0.5">Networking & Core Reflection</p>
+                            <span class="inline-block mt-2 text-[10px] font-bold px-2 py-0.5 rounded-md bg-amber-100/50 text-amber-800 border border-amber-200">Recharge</span>
+                        </div>
+                    </button>
+
+                    <!-- Step 5 -->
+                    <button onclick="switchTab(5)" class="w-full text-left p-4 hover:bg-slate-50 transition-colors duration-150 flex gap-3 block-btn" id="nav-5">
+                        <div class="flex flex-col items-center">
+                            <span class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 font-bold flex items-center justify-center text-xs tracking-tight">02:15</span>
+                            <div class="w-[2px] h-full bg-slate-200 mt-2"></div>
+                        </div>
+                        <div class="flex-grow pt-1">
+                            <h3 class="font-bold text-sm text-slate-700 leading-tight">Excel: Data Reasoning</h3>
+                            <p class="text-xs text-slate-500 mt-0.5">Table Requirements & Trends</p>
+                            <span class="inline-block mt-2 text-[10px] font-bold px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-700 border border-emerald-100">Live Demo</span>
+                        </div>
+                    </button>
+
+                    <!-- Step 6 -->
+                    <button onclick="switchTab(6)" class="w-full text-left p-4 hover:bg-slate-50 transition-colors duration-150 flex gap-3 block-btn" id="nav-6">
+                        <div class="flex flex-col items-center">
+                            <span class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 font-bold flex items-center justify-center text-xs tracking-tight">02:45</span>
+                            <div class="w-[2px] h-full bg-slate-200 mt-2"></div>
+                        </div>
+                        <div class="flex-grow pt-1">
+                            <h3 class="font-bold text-sm text-slate-700 leading-tight">PowerPoint: Build the Deck</h3>
+                            <p class="text-xs text-slate-500 mt-0.5">Document-to-Deck & Narrative</p>
+                            <span class="inline-block mt-2 text-[10px] font-bold px-2 py-0.5 rounded-md bg-orange-50 text-orange-700 border border-orange-100">Live Demo</span>
+                        </div>
+                    </button>
+
+                    <!-- Step 7 -->
+                    <button onclick="switchTab(7)" class="w-full text-left p-4 hover:bg-slate-50 transition-colors duration-150 flex gap-3 block-btn" id="nav-7">
+                        <div class="flex flex-col items-center">
+                            <span class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 font-bold flex items-center justify-center text-xs tracking-tight">03:15</span>
+                            <div class="w-[2px] h-full bg-slate-200 mt-2"></div>
+                        </div>
+                        <div class="flex-grow pt-1">
+                            <h3 class="font-bold text-sm text-slate-700 leading-tight">Teams: Digital Meeting Lifecycle</h3>
+                            <p class="text-xs text-slate-500 mt-0.5">Context Recovery & Action Recaps</p>
+                            <span class="inline-block mt-2 text-[10px] font-bold px-2 py-0.5 rounded-md bg-blue-50 text-malibanBlue border border-blue-100">Interactive Setup</span>
+                        </div>
+                    </button>
+
+                    <!-- Step 8 -->
+                    <button onclick="switchTab(8)" class="w-full text-left p-4 hover:bg-slate-50 transition-colors duration-150 flex gap-3 block-btn" id="nav-8">
+                        <div class="flex flex-col items-center">
+                            <span class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 font-bold flex items-center justify-center text-xs tracking-tight">03:45</span>
+                            <div class="w-[2px] h-full bg-slate-200 mt-2"></div>
+                        </div>
+                        <div class="flex-grow pt-1">
+                            <h3 class="font-bold text-sm text-slate-700 leading-tight">The Copilot Chat Hub & Microsoft Coworker</h3>
+                            <p class="text-xs text-slate-500 mt-0.5">Multi-Agent Splicing & Group Autonomy</p>
+                            <span class="inline-block mt-2 text-[10px] font-bold px-2 py-0.5 rounded-md bg-violet-50 text-violet-700 border border-violet-100">Executive Future</span>
+                        </div>
+                    </button>
+                </nav>
+            </div>
+
+        </div>
+
+        <!-- RIGHT COLUMN: MAIN CONTENT VIEW (lg:col-span-8) -->
+        <div class="lg:col-span-8 flex flex-col gap-6">
+            
+            <!-- TOOL CONTENT TABS (GCSE Builder / Data Assets / Previewer) - Shown conditionally on top of slide screens -->
+            <div id="companion-tool-container" class="hidden bg-white p-6 rounded-3xl shadow-sm border border-slate-100 transition-all duration-350">
+                <div class="flex justify-between items-center mb-5 border-b border-slate-100 pb-3">
+                    <h3 id="tool-title" class="text-base font-extrabold text-slate-800 flex items-center gap-2">
+                        <!-- Dynamic Tool Title -->
+                    </h3>
+                    <button onclick="closeToolTab()" class="text-slate-400 hover:text-slate-600 font-bold text-sm flex items-center gap-1">
+                        Close Tool ✕
+                    </button>
+                </div>
+
+                <!-- GCSE Prompt Builder Sandbox -->
+                <div id="tool-gcse-builder" class="hidden flex flex-col gap-4">
+                    <p class="text-xs text-slate-500 mb-2">Build a tailored Maliban prompt instantly by entering your specific targets in the GCSE blocks below:</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 mb-1">Goal (What do you want?)</label>
+                            <input type="text" id="builder-goal" placeholder="e.g., Draft an urgent performance review email" class="w-full text-xs p-3 border rounded-xl border-slate-200 focus:outline-none focus:ring-2 focus:ring-malibanBlue">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 mb-1">Context (Why / Maliban scenario)</label>
+                            <select id="builder-context" class="w-full text-xs p-3 border rounded-xl border-slate-200 focus:outline-none focus:ring-2 focus:ring-malibanBlue">
+                                <option value="regional distributor missed their Q1 volume targets for Maliban Ginger Biscuits by 12%">Distributor missed target (Ginger Biscuit)</option>
+                                <option value="there is an unexpected packaging laminate shipment delay at the Colombo port hurting factory margins">Packaging Shipment Delay at Colombo Port</option>
+                                <option value="the QA manager reported high scrap and biscuit breakage indices on the Ratmalana Line 01 cracker line">QA Crackers Breakage Index Alert</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 mb-1">Source (Data to look at)</label>
+                            <input type="text" id="builder-source" placeholder="e.g., the Q1 distributor ledger or factory log file" class="w-full text-xs p-3 border rounded-xl border-slate-200 focus:outline-none focus:ring-2 focus:ring-malibanBlue">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 mb-1">Expectations (Format & Tone)</label>
+                            <input type="text" id="builder-expectations" placeholder="e.g., Professional, assertive, structured in 3 clear bullet points" class="w-full text-xs p-3 border rounded-xl border-slate-200 focus:outline-none focus:ring-2 focus:ring-malibanBlue">
+                        </div>
+                    </div>
+                    <div class="flex justify-end mt-4">
+                        <button onclick="generateGcsePrompt()" class="bg-malibanBlue hover:bg-blue-800 text-white font-bold text-xs py-2.5 px-5 rounded-xl flex items-center gap-2 shadow-md transition-all">
+                            Generate & Copy Prompt
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Data Assets and Code blocks -->
+                <div id="tool-data-assets" class="hidden flex flex-col gap-4">
+                    <p class="text-xs text-slate-500 mb-2">Instant copy-paste snippets of the analytical mock datasets and generation notebook scripts.</p>
+                    <div class="flex border-b border-slate-100">
+                        <button onclick="switchAssetTab('py-prod')" class="asset-tab-btn active-asset-tab px-4 py-2 text-xs font-bold text-slate-500 hover:text-slate-800">Production Generation</button>
+                        <button onclick="switchAssetTab('py-sales')" class="asset-tab-btn px-4 py-2 text-xs font-bold text-slate-500 hover:text-slate-800">Sales Generation</button>
+                        <button onclick="switchAssetTab('py-ml-join')" class="asset-tab-btn px-4 py-2 text-xs font-bold text-slate-500 hover:text-slate-800">Fabric ML Joining Script</button>
+                    </div>
+                    
+                    <div id="asset-py-prod" class="asset-content-block block">
+                        <div class="flex justify-between items-center bg-slate-800 text-slate-300 p-2 rounded-t-lg text-[11px] font-mono px-4">
+                            <span>generate_production_yields.py</span>
+                            <button onclick="copySnippet('code-py-prod')" class="text-malibanGold font-bold hover:underline">Copy Code</button>
+                        </div>
+                        <pre id="code-py-prod" class="bg-slate-950 text-slate-300 text-[10px] p-4 rounded-b-lg font-mono overflow-x-auto max-h-[220px] scrollbar-thin"># Run this script to generate Maliban_Production_Yields_1000.csv
+import csv, random
+from datetime import datetime, timedelta
+
+start_date = datetime(2025, 1, 1)
+lines = ['Line_01_Ratmalana', 'Line_02_Ratmalana', 'Line_03_Ratmalana', 'Line_04_Galle']
+products = {
+    'Line_01_Ratmalana': 'Smart Cream Cracker', 'Line_02_Ratmalana': 'Ginger Biscuit',
+    'Line_03_Ratmalana': 'Lemon Puff', 'Line_04_Galle': 'Chocolate Cream'
+}
+supervisors = ['Perera.D', 'Silva.A', 'Fernando.K', 'Jayasinghe.M']
+
+with open("Maliban_Production_Yields_1000.csv", 'w', newline='') as f:
+    w = csv.writer(f)
+    w.writerow(['Date', 'Factory_Line', 'Product_Name', 'Target_Batches', 'Actual_Batches', 'Wastage_KG', 'Downtime_Minutes', 'Shift_Supervisor'])
+    
+    row_count = 0
+    day = 0
+    while row_count < 1000:
+        dt = (start_date + timedelta(days=day)).strftime('%Y-%m-%d')
+        for l in lines:
+            if row_count >= 1000: break
+            p, s = products[l], random.choice(supervisors)
+            t = random.randint(140, 210)
+            rnd = random.random()
+            if rnd < 0.06:
+                downtime = random.randint(45, 180)
+                act = int(t * random.uniform(0.60, 0.82))
+                wastage = round(random.uniform(65.0, 140.0), 1)
+            elif rnd > 0.94:
+                downtime = 0
+                act = int(t * random.uniform(1.01, 1.05))
+                wastage = round(random.uniform(5.0, 12.0), 1)
+            else:
+                downtime = random.choice([0, 0, 5, 10, 15])
+                act = int(t * random.uniform(0.95, 1.01))
+                wastage = round(random.uniform(12.5, 38.0), 1)
+            w.writerow([dt, l, p, t, max(0, act), wastage, downtime, s])
+            row_count += 1
+        day += 1
+print("Done!")</pre>
+                    </div>
+
+                    <div id="asset-py-sales" class="asset-content-block hidden">
+                        <div class="flex justify-between items-center bg-slate-800 text-slate-300 p-2 rounded-t-lg text-[11px] font-mono px-4">
+                            <span>generate_global_sales.py</span>
+                            <button onclick="copySnippet('code-py-sales')" class="text-malibanGold font-bold hover:underline">Copy Code</button>
+                        </div>
+                        <pre id="code-py-sales" class="bg-slate-950 text-slate-300 text-[10px] p-4 rounded-b-lg font-mono overflow-x-auto max-h-[220px] scrollbar-thin"># Run this script to generate Maliban_Global_Sales_Analysis.csv
+import csv, random
+
+distributors = [
+    ('DIST-901', 'Lanka Wholesale Central', 'Western Province (SL)', 'General Trade'),
+    ('DIST-902', 'UK EuroFoods Ltd', 'United Kingdom', 'Export'),
+    ('DIST-903', 'Aussie Bites & Snacks', 'Australia', 'Export'),
+    ('DIST-904', 'Ruhunu Retailers Coop', 'Southern Province (SL)', 'Modern Trade'),
+    ('DIST-905', 'Kandy Mega Distributors', 'Central Province (SL)', 'General Trade'),
+    ('DIST-906', 'Jaffna Unified Traders', 'Northern Province (SL)', 'General Trade'),
+    ('DIST-907', 'Maldives Retail Group', 'Maldives', 'Export'),
+    ('DIST-908', 'MiddleEast FMCG LLC', 'UAE', 'Export'),
+    ('DIST-909', 'Wayamba Traders', 'North Western Province', 'General Trade'),
+    ('DIST-910', 'Sabaragamuwa Distribution', 'Sabaragamuwa', 'General Trade')
+]
+categories = ['Savoury (Crackers)', 'Sweet (Ginger/Marie)', 'Cream Range']
+
+with open("Maliban_Global_Sales_Analysis.csv", 'w', newline='', encoding='utf-8') as f:
+    w = csv.writer(f)
+    w.writerow(['Month_Year', 'Distributor_ID', 'Distributor_Name', 'Region_Country', 'Channel', 'Product_Category', 'Units_Shipped', 'Target_Revenue_LKR', 'Actual_Revenue_LKR', 'Revenue_Gap_LKR', 'Outstanding_Balance_LKR', 'Credit_Status'])
+    
+    for year in range(2023, 2027):
+        for month in range(1, 13):
+            if year == 2026 and month > 4: break
+            dt = f"{year}-{month:02d}-01"
+            for d in distributors:
+                for c in categories:
+                    base = random.uniform(52000000, 115000000) if d[3] == 'Export' else random.uniform(16000000, 44000000)
+                    if month in [4, 12]: base *= 1.25 # Seasonal peak
+                    perf = random.normalvariate(0.96, 0.08)
+                    target = int(round(base, -3))
+                    act = int(round(base * perf, -3))
+                    gap = target - act
+                    units = int(act / random.uniform(220, 370))
+                    
+                    if perf < 0.85:
+                        bal, status = int(act * random.uniform(0.25, 0.45)), 'Hold'
+                    elif perf < 0.93:
+                        bal, status = int(act * random.uniform(0.10, 0.20)), 'Review'
+                    else:
+                        bal, status = int(act * random.uniform(0.0, 0.05)), 'Clear'
+                    
+                    w.writerow([dt, d[0], d[1], d[2], d[3], c, units, target, act, gap, bal, status])</pre>
+                    </div>
+
+                    <div id="asset-py-ml-join" class="asset-content-block hidden">
+                        <div class="flex justify-between items-center bg-slate-800 text-slate-300 p-2 rounded-t-lg text-[11px] font-mono px-4">
+                            <span>fabric_ml_pipeline.py</span>
+                            <button onclick="copySnippet('code-py-ml-join')" class="text-malibanGold font-bold hover:underline">Copy Code</button>
+                        </div>
+                        <pre id="code-py-ml-join" class="bg-slate-950 text-slate-300 text-[10px] p-4 rounded-b-lg font-mono overflow-x-auto max-h-[220px] scrollbar-thin"># Run this within Fabric Notebooks
+import pandas as pd
+import numpy as np
+from datetime import datetime
+from sklearn.linear_model import LinearRegression
+from pyspark.sql import SparkSession
+
+spark = SparkSession.builder.getOrCreate()
+
+# Load delta structures
+df_prod = spark.read.table("fact_production_yields").toPandas()
+df_sales = spark.read.table("fact_global_sales_analysis").toPandas()
+
+df_prod['Date'] = pd.to_datetime(df_prod['Date'])
+df_sales['Month_Year'] = pd.to_datetime(df_sales['Month_Year'])
+
+df_prod['Year_Month'] = df_prod['Date'].dt.to_period('M').astype(str)
+df_sales['Year_Month'] = df_sales['Month_Year'].dt.to_period('M').astype(str)
+
+product_mapping = {
+    'Smart Cream Cracker': 'Savoury (Crackers)',
+    'Ginger Biscuit': 'Sweet (Ginger/Marie)',
+    'Lemon Puff': 'Cream Range',
+    'Chocolate Cream': 'Cream Range'
+}
+df_prod['Product_Category'] = df_prod['Product_Name'].map(product_mapping)
+
+monthly_prod = df_prod.groupby(['Year_Month', 'Product_Category']).agg(
+    Total_Actual_Batches=('Actual_Batches', 'sum'),
+    Total_Wastage_KG=('Wastage_KG', 'sum'),
+    Total_Downtime_Minutes=('Downtime_Minutes', 'sum')
+).reset_index()
+
+df_merged = pd.merge(df_sales, monthly_prod, on=['Year_Month', 'Product_Category'], how='inner')
+
+# Train Machine Learning Models
+df_merged['Forecasted_Revenue_LKR'] = 0.0
+for category in df_merged['Product_Category'].unique():
+    cat_mask = df_merged['Product_Category'] == category
+    df_cat = df_merged[cat_mask].copy()
+    if len(df_cat) > 3:
+        df_cat['Time_Idx'] = np.arange(len(df_cat))
+        X = df_cat[['Time_Idx']]
+        y = df_cat['Actual_Revenue_LKR']
+        model = LinearRegression().fit(X, y)
+        df_merged.loc[cat_mask, 'Forecasted_Revenue_LKR'] = model.predict(X).astype(int)
+
+# Outlier Anomaly calculations
+mean_gap = df_merged['Revenue_Gap_LKR'].mean()
+std_gap = df_merged['Revenue_Gap_LKR'].std()
+df_merged['Operational_Risk_Score'] = ((df_merged['Revenue_Gap_LKR'] - mean_gap) / std_gap).round(2)
+df_merged['AI_Gap_Analysis_Flag'] = np.where(
+    (df_merged['Operational_Risk_Score'] > 1.0) & (df_merged['Total_Downtime_Minutes'] > df_merged['Total_Downtime_Minutes'].median()), 
+    "CRITICAL: Production Bottleneck Linked to Revenue Drop",
+    "Normal Operational Variance"
+)
+
+# Output Delta
+spark_df = spark.createDataFrame(df_merged.astype(str))
+spark_df.write.format("delta").mode("overwrite").saveAsTable("ai_maliban_predictive_analysis_master")
+print("✅ Table fully compiled!")</pre>
+                    </div>
+                </div>
+
+                <!-- CSV / File Data Preview Explorer -->
+                <div id="tool-file-preview" class="hidden flex flex-col gap-4">
+                    <div class="flex justify-between items-center bg-slate-50 p-2 rounded-lg border">
+                        <span class="text-xs font-bold text-slate-700">Explore Grounded Datasets (Page 1 Sample)</span>
+                        <div class="flex gap-2">
+                            <button onclick="toggleTablePreview('prod')" id="btn-tab-prod" class="bg-malibanBlue text-white text-xs px-3 py-1 rounded-md font-semibold">Production Yields Table</button>
+                            <button onclick="toggleTablePreview('sales')" id="btn-tab-sales" class="bg-slate-200 text-slate-700 text-xs px-3 py-1 rounded-md font-semibold">Global Sales Table</button>
+                        </div>
+                    </div>
+
+                    <!-- Production Table -->
+                    <div id="preview-prod-container" class="block overflow-x-auto max-h-[250px] scrollbar-thin border rounded-lg">
+                        <table class="w-full text-left text-[11px] font-mono border-collapse">
+                            <thead>
+                                <tr class="bg-slate-100 border-b border-slate-200">
+                                    <th class="p-2 font-bold text-slate-600">Date</th>
+                                    <th class="p-2 font-bold text-slate-600">Factory Line</th>
+                                    <th class="p-2 font-bold text-slate-600">Product Name</th>
+                                    <th class="p-2 font-bold text-slate-600">Target Batches</th>
+                                    <th class="p-2 font-bold text-slate-600">Actual Batches</th>
+                                    <th class="p-2 font-bold text-slate-600">Wastage KG</th>
+                                    <th class="p-2 font-bold text-slate-600">Downtime Mins</th>
+                                    <th class="p-2 font-bold text-slate-600">Supervisor</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-150">
+                                <tr><td class="p-2">2025-01-01</td><td class="p-2">Line_01_Ratmalana</td><td class="p-2">Smart Cream Cracker</td><td class="p-2">144</td><td class="p-2">142</td><td class="p-2">15.5</td><td class="p-2">5</td><td class="p-2 text-blue-700">Jayasinghe.M</td></tr>
+                                <tr><td class="p-2">2025-01-01</td><td class="p-2">Line_02_Ratmalana</td><td class="p-2">Ginger Biscuit</td><td class="p-2">206</td><td class="p-2">205</td><td class="p-2">17.1</td><td class="p-2">10</td><td class="p-2 text-blue-700">Perera.D</td></tr>
+                                <tr><td class="p-2">2025-01-01</td><td class="p-2">Line_03_Ratmalana</td><td class="p-2">Lemon Puff</td><td class="p-2">197</td><td class="p-2">188</td><td class="p-2">35.4</td><td class="p-2">10</td><td class="p-2 text-blue-700">Fernando.K</td></tr>
+                                <tr><td class="p-2">2025-01-01</td><td class="p-2">Line_04_Galle</td><td class="p-2">Chocolate Cream</td><td class="p-2">143</td><td class="p-2">89</td><td class="p-2 text-red-600 font-bold">76.2</td><td class="p-2 text-red-600 font-bold">142</td><td class="p-2 text-blue-700">Silva.A</td></tr>
+                                <tr><td class="p-2">2025-01-02</td><td class="p-2">Line_01_Ratmalana</td><td class="p-2">Smart Cream Cracker</td><td class="p-2">186</td><td class="p-2">186</td><td class="p-2">37.3</td><td class="p-2">5</td><td class="p-2 text-blue-700">Jayasinghe.M</td></tr>
+                                <tr><td class="p-2">2025-01-02</td><td class="p-2">Line_02_Ratmalana</td><td class="p-2">Ginger Biscuit</td><td class="p-2">161</td><td class="p-2">154</td><td class="p-2">34.4</td><td class="p-2">0</td><td class="p-2 text-blue-700">Jayasinghe.M</td></tr>
+                                <tr><td class="p-2">2025-01-02</td><td class="p-2">Line_03_Ratmalana</td><td class="p-2">Lemon Puff</td><td class="p-2">175</td><td class="p-2">173</td><td class="p-2">30.8</td><td class="p-2">15</td><td class="p-2 text-blue-700">Silva.A</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Sales Table -->
+                    <div id="preview-sales-container" class="hidden overflow-x-auto max-h-[250px] scrollbar-thin border rounded-lg">
+                        <table class="w-full text-left text-[11px] font-mono border-collapse">
+                            <thead>
+                                <tr class="bg-slate-100 border-b border-slate-200">
+                                    <th class="p-2 font-bold text-slate-600">Month_Year</th>
+                                    <th class="p-2 font-bold text-slate-600">Distributor_Name</th>
+                                    <th class="p-2 font-bold text-slate-600">Category</th>
+                                    <th class="p-2 font-bold text-slate-600">Units_Shipped</th>
+                                    <th class="p-2 font-bold text-slate-600">Target_LKR</th>
+                                    <th class="p-2 font-bold text-slate-600">Actual_LKR</th>
+                                    <th class="p-2 font-bold text-slate-600">Gap_LKR</th>
+                                    <th class="p-2 font-bold text-slate-600">Credit</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-150">
+                                <tr><td class="p-2">2023-01-01</td><td class="p-2">Lanka Wholesale Central</td><td class="p-2">Savoury (Crackers)</td><td class="p-2">146,646</td><td class="p-2">31,645,000</td><td class="p-2">33,681,000</td><td class="p-2 text-green-600">-2,036,000</td><td class="p-2">Clear</td></tr>
+                                <tr><td class="p-2">2023-01-01</td><td class="p-2">Lanka Wholesale Central</td><td class="p-2">Sweet (Ginger/Marie)</td><td class="p-2">44,972</td><td class="p-2">16,529,000</td><td class="p-2">14,983,000</td><td class="p-2 text-red-500 font-bold">1,546,000</td><td class="p-2 text-orange-600 font-bold">Review</td></tr>
+                                <tr><td class="p-2">2023-01-01</td><td class="p-2">Lanka Wholesale Central</td><td class="p-2">Cream Range</td><td class="p-2">40,136</td><td class="p-2">16,080,000</td><td class="p-2">14,653,000</td><td class="p-2 text-red-500 font-bold">1,427,000</td><td class="p-2 text-orange-600 font-bold">Review</td></tr>
+                                <tr><td class="p-2">2023-01-01</td><td class="p-2">UK EuroFoods Ltd</td><td class="p-2">Savoury (Crackers)</td><td class="p-2">289,534</td><td class="p-2">102,448,000</td><td class="p-2">99,357,000</td><td class="p-2">3,091,000</td><td class="p-2">Clear</td></tr>
+                                <tr><td class="p-2">2023-01-01</td><td class="p-2">UK EuroFoods Ltd</td><td class="p-2">Sweet (Ginger/Marie)</td><td class="p-2">240,495</td><td class="p-2">87,798,000</td><td class="p-2">83,211,000</td><td class="p-2">4,587,000</td><td class="p-2">Clear</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DYNAMIC MODULE VIEW (MAIN) -->
+            <main id="slide-container" class="bg-white p-6 md:p-8 rounded-3xl shadow-sm border border-slate-100 min-h-[520px] flex flex-col justify-between">
+                
+                <!-- Slide Header (Dynamic) -->
+                <div>
+                    <div class="flex flex-col md:flex-row justify-between md:items-center border-b border-slate-100 pb-4 mb-6 gap-3">
+                        <div>
+                            <span id="slide-time" class="text-xs font-bold text-malibanGold tracking-wide uppercase">11:15 AM - 11:45 AM</span>
+                            <h2 id="slide-title" class="text-xl md:text-2xl font-extrabold text-slate-800 tracking-tight mt-1">The Science of AI Orchestration</h2>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span id="slide-badge" class="bg-blue-50 text-malibanBlue border border-blue-100 text-xs font-semibold px-3 py-1 rounded-full">Module 1</span>
+                        </div>
+                    </div>
+
+                    <!-- Slide Content Sections -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="slide-body">
+                        <!-- Left Side: Trainer Instructions -->
+                        <div class="flex flex-col gap-4">
+                            <div>
+                                <h3 class="text-xs uppercase font-extrabold tracking-wider text-slate-400 mb-2">Presenter Guidance (What to say)</h3>
+                                <ul id="slide-bullets" class="space-y-3 text-sm text-slate-600 list-none pl-0">
+                                    <!-- Dynamic Bullets -->
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Right Side: Live Visual Tools / Sandbox / Interactive elements -->
+                        <div id="slide-interactive-area" class="bg-slate-50 p-5 rounded-2xl border border-slate-200">
+                            <!-- Dynamic interactive element populated by JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide Navigation Footer -->
+                <div class="mt-8 border-t border-slate-100 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+                    <button id="prev-btn" onclick="prevSlide()" class="w-full sm:w-auto text-slate-500 hover:text-slate-800 text-sm font-bold flex items-center justify-center gap-2 px-4 py-2 border rounded-xl hover:bg-slate-50 transition-colors">
+                        ← Previous Section
+                    </button>
+                    <div id="bullets-indicator" class="flex gap-2">
+                        <!-- Dynamic indicators -->
+                    </div>
+                    <button id="next-btn" onclick="nextSlide()" class="w-full sm:w-auto bg-malibanBlue hover:bg-blue-800 text-white text-sm font-bold flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl shadow-md transition-all">
+                        Next Section →
+                    </button>
+                </div>
+
+            </main>
+
+            <!-- LIVE COPILOT RESPONSE SIMULATOR (HIGH VALUE INTERACTIVE ELEMENT) -->
+            <section class="bg-slate-900 text-white rounded-3xl overflow-hidden border border-slate-800 shadow-2xl">
+                <!-- Header -->
+                <div class="bg-gradient-to-r from-slate-900 to-slate-850 p-4 border-b border-slate-800 flex justify-between items-center px-6">
+                    <div class="flex items-center gap-2">
+                        <div class="w-2.5 h-2.5 rounded-full bg-malibanGold"></div>
+                        <span class="text-xs font-bold uppercase tracking-wider text-slate-300">Live Copilot Playground & Response Simulator</span>
+                    </div>
+                    <div class="bg-blue-500/10 border border-blue-500/20 px-3 py-1 rounded-full text-[10px] text-blue-400 font-bold tracking-tight">
+                        Grounded on Maliban CSV Sheets
+                    </div>
+                </div>
+
+                <div class="p-6 grid grid-cols-1 md:grid-cols-12 gap-6">
+                    <!-- Prompt Selector (Left side) -->
+                    <div class="md:col-span-5 flex flex-col gap-4">
+                        <label class="text-xs font-bold text-slate-400">Select standard scenario prompt to trigger:</label>
+                        <div class="flex flex-col gap-2 max-h-[300px] overflow-y-auto scrollbar-thin divide-y divide-slate-800 pr-1">
+                            <button onclick="setSandboxPrompt('excel_gap')" class="text-left py-2.5 hover:text-malibanGold text-xs text-slate-300 transition-colors flex flex-col gap-0.5">
+                                <span class="font-bold text-slate-200">1. Excel: Western Province Sales Shortfall</span>
+                                <span class="text-[10px] text-slate-500 truncate">Identify Lanka Wholesale Central gaps</span>
+                            </button>
+                            <button onclick="setSandboxPrompt('outlook_coaching')" class="text-left py-2.5 hover:text-malibanGold text-xs text-slate-300 transition-colors flex flex-col gap-0.5">
+                                <span class="font-bold text-slate-200">2. Outlook: Tone Coaching (Customs delay)</span>
+                                <span class="text-[10px] text-slate-500 truncate">Draft critical email to port logistics managers</span>
+                            </button>
+                            <button onclick="setSandboxPrompt('word_grounded')" class="text-left py-2.5 hover:text-malibanGold text-xs text-slate-300 transition-colors flex flex-col gap-0.5">
+                                <span class="font-bold text-slate-200">3. Word: Biscuit Breakage Analysis</span>
+                                <span class="text-[10px] text-slate-500 truncate">Create QA remediation proposal</span>
+                            </button>
+                            <button onclick="setSandboxPrompt('teams_recap')" class="text-left py-2.5 hover:text-malibanGold text-xs text-slate-300 transition-colors flex flex-col gap-0.5">
+                                <span class="font-bold text-slate-200">4. Teams: Meeting Context Recovery</span>
+                                <span class="text-[10px] text-slate-500 truncate">Summarize missed minutes of marketing sync</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Playground Terminal (Right side) -->
+                    <div class="md:col-span-7 flex flex-col gap-3">
+                        <div class="flex flex-col gap-1.5">
+                            <span class="text-xs font-bold text-slate-400">Sandbox Prompt Input</span>
+                            <textarea id="sandbox-textarea" rows="3" class="bg-slate-950 text-slate-300 text-xs font-mono p-3 rounded-xl border border-slate-800 focus:outline-none focus:ring-1 focus:ring-malibanGold resize-none" placeholder="Select a preset scenario above or edit your prompt here..."></textarea>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <button onclick="copySandboxPrompt()" class="bg-slate-800 hover:bg-slate-750 text-slate-300 text-xs py-1.5 px-3 rounded-lg flex items-center gap-1.5 font-bold">
+                                📋 Copy Prompt
+                            </button>
+                            <button onclick="simulateCopilotResponse()" id="simulate-btn" class="bg-malibanGold hover:bg-amber-500 text-slate-900 text-xs font-bold py-2 px-5 rounded-lg flex items-center gap-1.5 transition-all shadow-md">
+                                Run Live Simulation →
+                            </button>
+                        </div>
+
+                        <!-- Simulated Output Panel -->
+                        <div class="bg-slate-950 rounded-xl p-4 border border-slate-850 min-h-[180px] max-h-[300px] overflow-y-auto scrollbar-thin">
+                            <div class="flex justify-between items-center mb-2 pb-2 border-b border-slate-800 text-[10px] font-mono text-slate-500">
+                                <span>Copilot Core Engine</span>
+                                <span id="simulation-status">Idle. Waiting for prompt...</span>
+                            </div>
+                            <div id="simulation-output" class="text-xs text-slate-300 font-mono leading-relaxed whitespace-pre-line">
+                                Click "Run Live Simulation" to witness how M365 Copilot processes and outputs FMCG analytics and text formatting instantly!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+    </div>
+
+    <!-- MAIN JAVASCRIPT APP STATE & INTERACTION -->
+    <script>
+        // Data Store for all Modules
+        const modulesData = {
+            1: {
+                time: "11:15 AM - 11:45 AM",
+                title: "The Science of AI Orchestration",
+                badge: "Intro & Frameworks",
+                bullets: [
+                    "<strong>Stop searching, start directing:</strong> Change management focus from standard search keyword strings to contextual, layered delegating. AI is your intern.",
+                    "<strong>The Intern Metaphor:</strong> Highlight that Copilot is extremely fast, has infinite knowledge, but lacks telepathic powers. If you give it short, empty commands, it guesses the variables.",
+                    "<strong>Mastering the GCSE Framework:</strong> Force them to utilize the structure: <strong>Goal</strong> (the explicit output format) + <strong>Context</strong> (why we are requesting) + <strong>Source</strong> (the grounding data files) + <strong>Expectations</strong> (the specific tone/style guidelines).",
+                    "<strong>Iterative loops:</strong> Demonstrate that drafting with Copilot is a conversational loop, not a single-shot transaction."
+                ],
+                interactive: `
+                    <div class="flex flex-col gap-4">
+                        <span class="text-xs font-extrabold text-slate-500 uppercase">The Prompt Maturity Upgrader</span>
+                        <p class="text-xs text-slate-600">Drag the slider to see how a weak prompt updates into a professional-grade GCSE instructions layer:</p>
+                        <input type="range" id="maturity-slider" min="1" max="3" value="1" oninput="updateMaturitySlider(this.value)" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-malibanBlue">
+                        <div class="flex justify-between text-[10px] font-bold text-slate-400 px-1">
+                            <span>Level 1 (Weak)</span>
+                            <span>Level 2 (Better)</span>
+                            <span>Level 3 (FMCG Leader)</span>
+                        </div>
+                        <div class="bg-white p-3.5 rounded-xl border border-slate-200 shadow-inner flex flex-col gap-2">
+                            <span class="text-[10px] font-extrabold uppercase text-slate-400" id="prompt-level-tag">LEVEL 1 PROMPT</span>
+                            <p class="text-xs font-mono text-slate-700" id="m-prompt-text">"Write an email to a distributor about missed targets."</p>
+                        </div>
+                        <button onclick="copySnippet('m-prompt-text')" class="bg-malibanBlue/10 text-malibanBlue font-bold text-xs py-2 px-4 rounded-xl hover:bg-malibanBlue/20 transition-all flex items-center justify-center gap-1">
+                            📋 Copy Active Prompt
+                        </button>
+                    </div>
+                `
+            },
+            2: {
+                time: "11:45 AM - 12:30 PM",
+                title: "Outlook: Tame the Inbox",
+                badge: "Inbox Mastery",
+                bullets: [
+                    "<strong>Thread Summarization:</strong> Show managers how to collapse complex, multi-threaded email cycles with regional wholesalers or raw packaging suppliers into 4 clear bullets.",
+                    "<strong>Drafting with Intent:</strong> Demonstrate typing a simple 10-word directive to let Copilot build a beautiful, formally styled business email response.",
+                    "<strong>Coaching by Copilot:</strong> Highly critical for executives who need to send sensitive messages about delayed shipping containers, fuel surcharges, or performance targets without creating relationship friction."
+                ],
+                interactive: `
+                    <div class="flex flex-col gap-3">
+                        <span class="text-xs font-extrabold text-slate-500 uppercase">Outlook Pro Prompt Deck (Double-Click to Copy)</span>
+                        
+                        <!-- Accordion Style Prompts -->
+                        <div class="space-y-2 max-h-[220px] overflow-y-auto scrollbar-thin">
+                            <div class="bg-white p-2.5 rounded-xl border border-slate-200 hover:border-malibanGold transition-all">
+                                <span class="text-[10px] font-bold text-emerald-600 block">Prompt A: Thread Splicing (Sourcing Delay)</span>
+                                <p id="out-p-a" class="text-[11px] font-mono text-slate-600 mt-1 cursor-pointer hover:text-slate-900" onclick="copySnippet('out-p-a')">"Summarize the past 48 hours of emails concerning the 'laminate shipping delay' at Colombo Port. Isolate the exact documents holding up the container, and identify who needs to sign off next."</p>
+                            </div>
+                            
+                            <div class="bg-white p-2.5 rounded-xl border border-slate-200 hover:border-malibanGold transition-all">
+                                <span class="text-[10px] font-bold text-emerald-600 block">Prompt B: Balance Credit Release Negotiations</span>
+                                <p id="out-p-b" class="text-[11px] font-mono text-slate-600 mt-1 cursor-pointer hover:text-slate-900" onclick="copySnippet('out-p-b')">"Draft a highly professional, collaborative email to the Managing Director of Lanka Wholesale Central. State that we must pause their Q2 credit extension due to an outstanding balance of LKR 8,257. Suggest a strategic recovery meeting this Friday."</p>
+                            </div>
+
+                            <div class="bg-white p-2.5 rounded-xl border border-slate-200 hover:border-malibanGold transition-all">
+                                <span class="text-[10px] font-bold text-emerald-600 block">Prompt C: Coaching Response tone (Delayed Batch)</span>
+                                <p id="out-p-c" class="text-[11px] font-mono text-slate-600 mt-1 cursor-pointer hover:text-slate-900" onclick="copySnippet('out-p-c')">"Act as a Sourcing Coach. Review my draft reply regarding the production delays of Chocolate Creams. Suggest improvements to make the tone sound confident and reassuring for our Maldives Retail Group distributor."</p>
+                            </div>
+                        </div>
+
+                        <div class="border-t border-slate-200 pt-2 flex flex-col gap-1">
+                            <span class="text-[10px] font-bold text-slate-500">TRAINER INSTRUCTION:</span>
+                            <p class="text-[10px] text-slate-600 italic">Show them how 'Draft with Copilot' saves 25 minutes of carefully writing sensitive financial notifications.</p>
+                        </div>
+                    </div>
+                `
+            },
+            3: {
+                time: "12:30 PM - 01:15 PM",
+                title: "Word: Intellectual Splicing",
+                badge: "Grounded Documents",
+                bullets: [
+                    "<strong>Blank Page Syndrome:</strong> Demonstrate utilizing the <strong>/ (slash command)</strong> to summon and references files live inside a blank Word file.",
+                    "<strong>Source Grounding:</strong> Use raw competitor research text files to instantly write a professional, formatted 'Maliban Market Defence Strategy' document.",
+                    "<strong>Content Redrafting:</strong> Highlight a paragraph of complex operational logistics and let Copilot translate it into high-level executive bullet points for the Group Chairperson."
+                ],
+                interactive: `
+                    <div class="flex flex-col gap-3">
+                        <span class="text-xs font-extrabold text-slate-500 uppercase">Word Pro Prompt Deck (Double-Click to Copy)</span>
+                        
+                        <div class="space-y-2 max-h-[220px] overflow-y-auto scrollbar-thin">
+                            <div class="bg-white p-2.5 rounded-xl border border-slate-200 hover:border-indigo-600 transition-all">
+                                <span class="text-[10px] font-bold text-indigo-700 block">Prompt A: Strategic Proposal Draft</span>
+                                <p id="word-p-a" class="text-[11px] font-mono text-slate-600 mt-1 cursor-pointer hover:text-slate-900" onclick="copySnippet('word-p-a')">"Draft a 3-page Market Defense Proposal using competitor trends from Lanka_Biscuit_Intel.docx. Create structured headers for product segments (Lemon Puff, Ginger Biscuits) and pricing risk margins."</p>
+                            </div>
+                            
+                            <div class="bg-white p-2.5 rounded-xl border border-slate-200 hover:border-indigo-600 transition-all">
+                                <span class="text-[10px] font-bold text-indigo-700 block">Prompt B: QA SOP Simplification</span>
+                                <p id="word-p-b" class="text-[11px] font-mono text-slate-600 mt-1 cursor-pointer hover:text-slate-900" onclick="copySnippet('word-p-b')">"Rewrite this technical QA standard operating guidelines section to make it highly persuasive and easy to read for the factory shift supervisors. Use bold action verbs and structured bullet points."</p>
+                            </div>
+
+                            <div class="bg-white p-2.5 rounded-xl border border-slate-200 hover:border-indigo-600 transition-all">
+                                <span class="text-[10px] font-bold text-indigo-700 block">Prompt C: Executive Board Abstract Splicing</span>
+                                <p id="word-p-c" class="text-[11px] font-mono text-slate-600 mt-1 cursor-pointer hover:text-slate-900" onclick="copySnippet('word-p-c')">"Act as Chief Strategy Officer. Take the attached detailed 12-page distributor report and create a concise 1-page Executive Briefing for the Board of Directors. Focus on credit holds and volume bottlenecks."</p>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            4: {
+                time: "01:15 PM - 02:15 PM",
+                title: "LUNCH BREAK (1 Hour)",
+                badge: "Midday Break",
+                bullets: [
+                    "Let attendees stretch and step away from the terminals.",
+                    "Use this block to cross-reference with the organizing team and verify that all participants have Excel table formatting activated.",
+                    "Check your local OneDrive file syncs to ensure the Word proposal generated earlier is accessible for the PowerPoint module."
+                ],
+                interactive: `
+                    <div class="flex flex-col items-center justify-center py-6 text-center gap-3">
+                        <div class="p-3 bg-amber-100 rounded-full text-amber-700">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m12.728 12.728l.707.707M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </div>
+                        <h4 class="font-bold text-sm text-slate-800">Operational Sync Break</h4>
+                        <p class="text-xs text-slate-500 max-w-xs">Double-check that participants have formatted the upcoming Sales dataset as a Table before starting Excel sessions.</p>
+                    </div>
+                `
+            },
+            5: {
+                time: "02:15 PM - 02:45 PM",
+                title: "Excel: Data Reasoning",
+                badge: "Analytical Edge",
+                bullets: [
+                    "<strong>Prerequisites are strict:</strong> Teach them that Copilot is blind unless data is formatted inside an official Excel Table (<code>Ctrl + T</code>) with visible headers.",
+                    "<strong>Conversational Data Analysis:</strong> Ask plain English questions to run standard aggregation tasks without memory-taxing VLOOKUPs or complex manual coding.",
+                    "<strong>Calculated Columns:</strong> Watch Copilot instantly engineer formulas, identify distributor gap margins, and dynamically append values to rows."
+                ],
+                interactive: `
+                    <div class="flex flex-col gap-3">
+                        <span class="text-xs font-extrabold text-slate-500 uppercase">Excel Multi-Prompt Suite (Copy & Demo)</span>
+                        
+                        <div class="space-y-2 max-h-[220px] overflow-y-auto scrollbar-thin">
+                            <div class="bg-white p-2 rounded-xl border border-slate-200 hover:border-emerald-600 transition-all">
+                                <span class="text-[10px] font-bold text-emerald-700 block">Prompt 1: Anomaly & Gap Detection</span>
+                                <p id="excel-p-1" class="text-[11px] font-mono text-slate-600 mt-0.5 cursor-pointer hover:text-slate-900" onclick="copySnippet('excel-p-1')">"Identify all records where the 'Revenue_Gap_LKR' was positive (meaning we missed targets) and 'Credit_Status' was 'Review' or 'Hold'. Show me the top 3 biggest shortfalls."</p>
+                            </div>
+                            
+                            <div class="bg-white p-2 rounded-xl border border-slate-200 hover:border-emerald-600 transition-all">
+                                <span class="text-[10px] font-bold text-emerald-700 block">Prompt 2: Dynamic Penalty Formula</span>
+                                <p id="excel-p-2" class="text-[11px] font-mono text-slate-600 mt-0.5 cursor-pointer hover:text-slate-900" onclick="copySnippet('excel-p-2')">"Add a new column titled 'Dynamic_Credit_Penalty'. If the Credit_Status is 'Hold', calculate a 4.5% interest penalty on the Outstanding_Balance_LKR. If 'Review', calculate 2.0%. Otherwise, set it to 0."</p>
+                            </div>
+
+                            <div class="bg-white p-2 rounded-xl border border-slate-200 hover:border-emerald-600 transition-all">
+                                <span class="text-[10px] font-bold text-emerald-700 block">Prompt 3: Clustered Viz Generation</span>
+                                <p id="excel-p-3" class="text-[11px] font-mono text-slate-600 mt-0.5 cursor-pointer hover:text-slate-900" onclick="copySnippet('excel-p-3')">"Create a clustered column chart comparing target vs. actual LKR revenues for all Export channel distributors. Filter the data to focus on UK, Australia, and Maldives."</p>
+                            </div>
+
+                            <div class="bg-white p-2 rounded-xl border border-slate-200 hover:border-emerald-600 transition-all">
+                                <span class="text-[10px] font-bold text-emerald-700 block">Prompt 4: Supervisor-Wastage Correlations</span>
+                                <p id="excel-p-4" class="text-[11px] font-mono text-slate-600 mt-0.5 cursor-pointer hover:text-slate-900" onclick="copySnippet('excel-p-4')">"Analyze the production sheet. Is there a correlation between Downtime_Minutes and high Wastage_KG? Tell me which Shift Supervisor has managed the most downtime events."</p>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            6: {
+                time: "02:45 PM - 03:15 PM",
+                title: "PowerPoint: Build the Deck",
+                badge: "Narrative Pitching",
+                bullets: [
+                    "<strong>Document-to-Deck:</strong> Take the 'Market Defence Proposal' generated in Word and point Copilot at it. It builds the structure automatically.",
+                    "<strong>Automated Presentation Flows:</strong> Explain how Copilot builds complete narrative streams, places layouts, and formats slide grids.",
+                    "<strong>Custom Narratives & Speaker Notes:</strong> Copilot populates the Presenter Notes tab automatically with relevant strategic summaries for the slide context."
+                ],
+                interactive: `
+                    <div class="flex flex-col gap-3">
+                        <span class="text-xs font-extrabold text-slate-500 uppercase">PowerPoint Pro Prompt Deck (Double-Click to Copy)</span>
+                        
+                        <div class="space-y-2 max-h-[220px] overflow-y-auto scrollbar-thin">
+                            <div class="bg-white p-2.5 rounded-xl border border-slate-200 hover:border-orange-600 transition-all">
+                                <span class="text-[10px] font-bold text-orange-700 block">Prompt A: Turn Word Proposal to Slide Deck</span>
+                                <p id="ppt-p-a" class="text-[11px] font-mono text-slate-600 mt-1 cursor-pointer hover:text-slate-900" onclick="copySnippet('ppt-p-a')">"Create a 7-slide presentation based on the Maliban Market Defense Proposal Word file. Ensure there are dedicated slides for the Southern Province and Western Province gaps, and generate full speaker notes for me."</p>
+                            </div>
+                            
+                            <div class="bg-white p-2.5 rounded-xl border border-slate-200 hover:border-orange-600 transition-all">
+                                <span class="text-[10px] font-bold text-orange-700 block">Prompt B: Visual Storytelling Grid Layout</span>
+                                <p id="ppt-p-b" class="text-[11px] font-mono text-slate-600 mt-1 cursor-pointer hover:text-slate-900" onclick="copySnippet('ppt-p-b')">"Re-arrange Slide 4 to use a modern, 3-column clean visual grid. Create a custom image prompt for a high-tech modern biscuit packing machine to place on the right of the text."</p>
+                            </div>
+
+                            <div class="bg-white p-2.5 rounded-xl border border-slate-200 hover:border-orange-600 transition-all">
+                                <span class="text-[10px] font-bold text-orange-700 block">Prompt C: Conference Pitch Agenda</span>
+                                <p id="ppt-p-c" class="text-[11px] font-mono text-slate-600 mt-1 cursor-pointer hover:text-slate-900" onclick="copySnippet('ppt-p-c')">"Generate a presentation structure for our Q2 Distributor Conference. Include dedicated templates for Celebrating High Attainment Regions, Sourcing Adaptations, and outstanding credit control benchmarks."</p>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            7: {
+                time: "03:15 PM - 03:45 PM",
+                title: "Teams: Digital Meeting Lifecycle",
+                badge: "Collaborative Sync",
+                bullets: [
+                    "<strong>Context Recovery:</strong> Joining a high-stakes supply chain status meeting late? Ask Copilot privately to summarize the discussed targets and check if you were mentioned.",
+                    "<strong>Intelligent Recap:</strong> Highlight that managers can query detailed transcript summaries, extract action items, and map distributor agreements instantly.",
+                    "<strong>Live Task Tracking:</strong> Directing Copilot to map names to tasks from the live discussion history."
+                ],
+                interactive: `
+                    <div class="flex flex-col gap-3">
+                        <span class="text-xs font-extrabold text-slate-500 uppercase">Teams Scenario Prompts (Double-Click to Copy)</span>
+                        
+                        <div class="space-y-2 max-h-[220px] overflow-y-auto scrollbar-thin">
+                            <div class="bg-white p-2.5 rounded-xl border border-slate-200 hover:border-blue-600 transition-all">
+                                <span class="text-[10px] font-bold text-blue-700 block">Prompt A: Catch Up On Late Arrivals</span>
+                                <p id="teams-p-a" class="text-[11px] font-mono text-slate-600 mt-1 cursor-pointer hover:text-slate-900" onclick="copySnippet('teams-p-a')">"Summarize the arguments concerning shipping route changes and fuel surcharges. Let me know if my name or department has been mentioned during this meeting so far."</p>
+                            </div>
+                            
+                            <div class="bg-white p-2.5 rounded-xl border border-slate-200 hover:border-blue-600 transition-all">
+                                <span class="text-[10px] font-bold text-blue-700 block">Prompt B: Extract Action Items Matrix</span>
+                                <p id="teams-p-b" class="text-[11px] font-mono text-slate-600 mt-1 cursor-pointer hover:text-slate-900" onclick="copySnippet('teams-p-b')">"Generate an interactive task matrix from the transcript discussion. Match action items to names, identify target dates, and isolate any pending structural disputes."</p>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            8: {
+                time: "03:45 PM - 04:15 PM",
+                title: "The Copilot Chat Hub & Microsoft Coworker",
+                badge: "The Future of FMCG",
+                bullets: [
+                    "<strong>What is Microsoft Coworker?</strong> Unlike a standard chatbot that only responds when prompted, the <strong>Microsoft Coworker</strong> operates as an active, autonomous participant inside Microsoft Teams channels.",
+                    "<strong>Proactive Engagement via ARR:</strong> It autonomously monitors text conversations and schedules tasks. Learn to run a **GPS Check** before automating: if the Goal, Proof, or Steps are vague, the agent will execute the wrong tasks with total confidence.",
+                    "<strong>The Anatomy of an Agent:</strong> Uses the core Language Model surrounded by 4 active workers: the **Analyst** (finds patterns), the **Planner** (maps directions), the **Operator** (does the work), and the **Auditor** (verifies logical accuracy).",
+                    "<strong>The OODA Adaptive Loop:</strong> When standard paths break (e.g., flour out-of-stock), the Coworker loops through its **OODA cycle** (Observe, Orient, Decide, Act) to autonomously reroute, substitute, and rebuild operational workflows."
+                ],
+                interactive: `
+                    <div class="flex flex-col gap-3 text-left">
+                        <span class="text-xs font-extrabold text-slate-500 uppercase">Agentic & Proactive Coworker Tools</span>
+                        
+                        <div class="grid grid-cols-2 gap-2">
+                            <button onclick="openGPSModal()" class="bg-white hover:bg-slate-50 border border-slate-300 py-1.5 px-2.5 rounded-lg text-[10px] font-bold flex items-center justify-center gap-1 text-slate-700">
+                                📋 Run GPS Check
+                            </button>
+                            <button onclick="launchCoworkerSimulation()" class="bg-gradient-to-r from-purple-700 to-indigo-700 text-white font-bold text-[10px] py-1.5 px-2.5 rounded-lg hover:shadow-md transition-all flex items-center justify-center gap-1">
+                                🚀 Launch 4-Worker Loop
+                            </button>
+                        </div>
+
+                        <div class="space-y-1.5 max-h-[140px] overflow-y-auto scrollbar-thin">
+                            <div class="bg-white p-2 rounded-lg border hover:border-purple-600 transition-all">
+                                <span class="text-[9px] font-bold text-purple-700 block">Prompt 1: Autonomous Weekly Operational Brief (ARR-Aligned)</span>
+                                <p id="coworker-p-1" class="text-[10px] font-mono text-slate-600 mt-0.5 cursor-pointer hover:text-slate-900 leading-snug" onclick="copySnippet('coworker-p-1')">"Every Monday at 7:00 AM, read the past week's 'fact_production_yields' table. [Analyst] Identify three biggest recurring downtime lines. [Planner] Draft a priority order response. [Operator] Email the brief to @PlantManager. [Auditor] Verify no empty rows or false supervisors are listed."</p>
+                            </div>
+
+                            <div class="bg-white p-2 rounded-lg border hover:border-purple-600 transition-all">
+                                <span class="text-[9px] font-bold text-purple-700 block">Prompt 2: OODA Dynamic Distributor Rerouting</span>
+                                <p id="coworker-p-2" class="text-[10px] font-mono text-slate-600 mt-0.5 cursor-pointer hover:text-slate-900 leading-snug" onclick="copySnippet('coworker-p-2')">"If the sales table flags an Export distributor as 'Hold' credit status, do not halt shipping. Observe the historical credit limits. Orient the gap against outstanding balances. Decide on a 15% discount substitute or shipping pause. Act by alerting @SalesDirector."</p>
+                            </div>
+                        </div>
+                    </div>
+                `
+            }
+        };
+
+        // Active State Tracker
+        let currentTab = 1;
+
+        // Custom simulated preset outputs
+        const simulatedAnswers = {
+            excel_gap: {
+                status: "Scanning Maliban_Global_Sales_Analysis.csv Table...",
+                output: `🤖 COPILOT IN EXCEL RESPONSE:
+Based on the analysis of your uploaded Global Sales dataset, here are the top 3 distributors showing the largest negative performance gaps (Target vs. Actual LKR):
+
+| Distributor ID | Distributor Name | Product Category | Target Revenue (LKR) | Actual Revenue (LKR) | Revenue Gap (LKR) | Credit Status |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| DIST-901 | Lanka Wholesale Central | Sweet (Ginger/Marie) | 16,529,000 | 14,983,000 | 1,546,000 | Review |
+| DIST-901 | Lanka Wholesale Central | Cream Range | 16,080,000 | 14,653,000 | 1,427,000 | Review |
+| DIST-902 | UK EuroFoods Ltd | Savoury (Crackers) | 102,448,000 | 99,357,000 | 3,091,000 | Clear |
+
+Key Observations:
+- **DIST-901 (Lanka Wholesale Central)** is underperforming significantly on both the **Sweet** and **Cream Range** lines, with both categories flagged for Credit Status **'Review'**. This suggests outstanding collections are directly throttling supply allocations.
+- While **UK EuroFoods Ltd** has a larger numeric gap (LKR 3,091,000), their target volume is over LKR 102 Million, meaning their attainment rate is exceptionally high (>96.9%) and they remain in **'Clear'** credit status.`
+            },
+            outlook_coaching: {
+                status: "Analyzing email chain and drafting response...",
+                output: `🤖 COPILOT IN OUTLOOK RESPONSE:
+Summary of the delayed shipment thread:
+- Freight forwarder states that the container of packaging laminate is on hold at the Colombo port due to a missing certification link.
+- Shipping line has charged a daily demurrage fee starting yesterday.
+- Maliban Procurement team indicates they submitted the papers on Monday.
+
+Drafting Reply (Coaching by Copilot Analysis):
+---
+Subject: Re: [URGENT] Sourcing Hold / Demurrage Release - Colombo Port
+Dear Freight Forwarder and Sourcing Team,
+
+Thank you for the detailed breakdown.
+
+To expedite this, our internal documentation team is currently re-uploading the missing compliance certificates. We estimate this will be finalized and sent to you by 2:00 PM today. 
+
+Please confirm receipt of these documents as soon as they land and provide an updated port clearance timeline. We need to work closely to mitigate further demurrage charges and avoid plant downtime at our Ratmalana factory.
+
+Sincerely,
+National Operations Director, Maliban Biscuit Manufactories
+---
+💡 Coaching Tips applied: Tone adjusted to balance 'Urgent' with 'Collaborative'. Added clear accountability timelines to prevent further operational bottlenecks.`
+            },
+            word_grounded: {
+                status: "Grounding prompt with Maliban_Production_Yields_1000.csv...",
+                output: `🤖 COPILOT IN WORD RESPONSE:
+I have compiled a formal 'Quality Remediation and Plant Yield Defense Plan' utilizing actual downtime trends identified in your Production dataset:
+
+# QUALITY REMEDIATION AND FACTORY OPERATIONS PROPOSAL
+
+## 1. Executive Summary
+This proposal outlines technical and supervisor-level defense protocols to isolate recent scrap index issues on biscuit manufacturing lines, focusing heavily on anomalies in the **Line_04_Galle (Chocolate Cream)** and **Line_01_Ratmalana (Smart Cream Cracker)** shifts.
+
+## 2. Identified Operational Outliers
+* **Machine Downtime Impact:** On 2025-01-01, Line_04_Galle suffered a high downtime anomaly of **142 Minutes**, causing a significant batch attainment gap (Target: 143, Actual: 89) and a massive wastage spike of **76.2 KG** under supervisor **Silva.A**.
+* **Wastage Correlations:** Analysis shows a statistical spike in ingredient wastage directly proportional to startup logs following extended downtime on cream-filled biscuit lines.
+
+## 3. Targeted Action Plan
+- **Action 1:** Mandate line recalibrations under supervisor **Silva.A** for Line 04.
+- **Action 2:** Establish automatic shutdown rules if idle cooling lines exceed 45 consecutive minutes, protecting raw ingredient batches.`
+            },
+            teams_recap: {
+                status: "Analyzing running meeting transcript...",
+                output: `🤖 COPILOT IN TEAMS RECAP:
+Here is your private summary of the marketing budget discussion from the last 20 minutes:
+
+**Key Arguments Spliced:**
+- **Sourcing Strategy:** Perera.D argued that rising fuel costs mean we should prioritize local provincial distribution instead of pushing aggressive outer-island distribution campaigns.
+- **Promotional Budget:** Jayasinghe.M proposed re-allocating 15% of the export promotion budget to fund targeted local distributor incentives.
+- **Mention Tracker:** Your name was mentioned by Fernando.K, who indicated that your approval would be required before the export budget slice is altered.
+
+**Action Item Allocation:**
+- **Perera.D:** Map out shipping route cost impacts for Ratmalana Lines (Due tomorrow).
+- **Jayasinghe.M:** Draft detailed incentive matrix for Kandy and Galle regions.`
+            }
+        };
+
+        // Tab Switching Logic
+        function switchTab(tabNum) {
+            currentTab = tabNum;
+            const data = modulesData[tabNum];
+
+            // Update Progress UI
+            document.getElementById("progress-bar").style.width = `${(tabNum / 8) * 100}%`;
+            document.getElementById("progress-text").textContent = `Module ${tabNum} of 8`;
+            document.getElementById("progress-percentage").textContent = `${Math.round((tabNum / 8) * 100)}% Completed`;
+
+            // Clear Active Styling from Nav
+            document.querySelectorAll(".block-btn").forEach(btn => {
+                btn.classList.remove("bg-blue-50", "border-l-4", "border-malibanBlue", "pl-3", "active-block");
+                // Reset bullet numbers bg
+                const numSpan = btn.querySelector("span");
+                if (numSpan) {
+                    numSpan.classList.remove("bg-malibanBlue", "text-white");
+                    numSpan.classList.add("bg-slate-100", "text-slate-500");
+                }
+            });
+
+            // Set Active Styling
+            const activeNav = document.getElementById(`nav-${tabNum}`);
+            activeNav.classList.add("bg-blue-50", "border-l-4", "border-malibanBlue", "pl-3", "active-block");
+            const activeNumSpan = activeNav.querySelector("span");
+            if (activeNumSpan) {
+                activeNumSpan.classList.remove("bg-slate-100", "text-slate-500");
+                activeNumSpan.classList.add("bg-malibanBlue", "text-white");
+            }
+
+            // Update Main Content Area
+            document.getElementById("slide-time").textContent = data.time;
+            document.getElementById("slide-title").textContent = data.title;
+            document.getElementById("slide-badge").textContent = data.badge;
+
+            // Generate Bullets
+            const bulletContainer = document.getElementById("slide-bullets");
+            bulletContainer.innerHTML = "";
+            data.bullets.forEach(bullet => {
+                const li = document.createElement("li");
+                li.className = "flex gap-2.5 items-start text-xs text-slate-600 leading-relaxed";
+                li.innerHTML = `
+                    <span class="w-1.5 h-1.5 rounded-full bg-malibanBlue mt-1.5 flex-shrink-0"></span>
+                    <span>${bullet}</span>
+                `;
+                bulletContainer.appendChild(li);
+            });
+
+            // Update Interactive Section
+            document.getElementById("slide-interactive-area").innerHTML = data.interactive;
+
+            // Handle Nav Button states
+            document.getElementById("prev-btn").disabled = (tabNum === 1);
+            document.getElementById("next-btn").disabled = (tabNum === 8);
+
+            // Close Tool tab if visible to keep slide screen organized
+            closeToolTab();
+        }
+
+        function prevSlide() {
+            if (currentTab > 1) {
+                switchTab(currentTab - 1);
+            }
+        }
+
+        // Main slider handler
+        function nextSlide() {
+            if (currentTab < 8) {
+                switchTab(currentTab + 1);
+            }
+        }
+
+        // Active tool display controller
+        function activateToolTab(toolType) {
+            const container = document.getElementById("companion-tool-container");
+            const builderSection = document.getElementById("tool-gcse-builder");
+            const assetsSection = document.getElementById("tool-data-assets");
+            const previewSection = document.getElementById("tool-file-preview");
+            const title = document.getElementById("tool-title");
+
+            container.classList.remove("hidden");
+
+            if (toolType === 'builder') {
+                builderSection.classList.remove("hidden");
+                assetsSection.classList.add("hidden");
+                previewSection.classList.add("hidden");
+                title.innerHTML = `
+                    <svg class="w-5 h-5 text-malibanGold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+                    Interactive GCSE Prompt Builder Sandbox
+                `;
+            } else if (toolType === 'assets') {
+                assetsSection.classList.remove("hidden");
+                builderSection.classList.add("hidden");
+                previewSection.classList.add("hidden");
+                title.innerHTML = `
+                    <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg>
+                    FMCG Code & Data Asset Vault
+                `;
+            } else if (toolType === 'preview') {
+                previewSection.classList.remove("hidden");
+                builderSection.classList.add("hidden");
+                assetsSection.classList.add("hidden");
+                title.innerHTML = `
+                    <svg class="w-5 h-5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                    FMCG Grounded Data Explorer
+                `;
+            }
+            container.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function closeToolTab() {
+            document.getElementById("companion-tool-container").classList.add("hidden");
+        }
+
+        // Active asset controller
+        function switchAssetTab(assetId) {
+            document.querySelectorAll(".asset-tab-btn").forEach(btn => {
+                btn.classList.remove("active-asset-tab", "border-b-2", "border-malibanBlue", "text-malibanBlue");
+            });
+            document.querySelectorAll(".asset-content-block").forEach(block => {
+                block.classList.add("hidden");
+            });
+
+            // Target Active tab
+            event.target.classList.add("active-asset-tab", "border-b-2", "border-malibanBlue", "text-malibanBlue");
+            document.getElementById(`asset-${assetId}`).classList.remove("hidden");
+        }
+
+        // Toggle Table Preview Explorer
+        function toggleTablePreview(type) {
+            const prodCont = document.getElementById("preview-prod-container");
+            const salesCont = document.getElementById("preview-sales-container");
+            const btnProd = document.getElementById("btn-tab-prod");
+            const btnSales = document.getElementById("btn-tab-sales");
+
+            if (type === 'prod') {
+                prodCont.classList.remove("hidden");
+                salesCont.classList.add("hidden");
+                btnProd.className = "bg-malibanBlue text-white text-xs px-3 py-1 rounded-md font-semibold";
+                btnSales.className = "bg-slate-200 text-slate-700 text-xs px-3 py-1 rounded-md font-semibold";
+            } else {
+                prodCont.classList.add("hidden");
+                salesCont.classList.remove("hidden");
+                btnProd.className = "bg-slate-200 text-slate-700 text-xs px-3 py-1 rounded-md font-semibold";
+                btnSales.className = "bg-malibanBlue text-white text-xs px-3 py-1 rounded-md font-semibold";
+            }
+        }
+
+        // GCSE Custom Builder function
+        function generateGcsePrompt() {
+            const goal = document.getElementById("builder-goal").value || "Draft an operational status summary";
+            const context = document.getElementById("builder-context").value;
+            const source = document.getElementById("builder-source").value || "our live manufacturing delta records";
+            const expectations = document.getElementById("builder-expectations").value || "formal, concise, formatted in a table";
+
+            const generatedPrompt = `Act as a Senior Operations Director. Goal: ${goal}. Context: Because ${context}. Source: Ground this query strictly in ${source}. Expectations: The output must be ${expectations}.`;
+
+            navigator.clipboard.writeText(generatedPrompt).then(() => {
+                showToast("GCSE prompt copied to clipboard!");
+            }).catch(() => {
+                const dummy = document.createElement("textarea");
+                document.body.appendChild(dummy);
+                dummy.value = generatedPrompt;
+                dummy.select();
+                document.execCommand("copy");
+                document.body.removeChild(dummy);
+                showToast("GCSE prompt copied to clipboard!");
+            });
+        }
+
+        // Clipboard helper using requested fallback logic
+        function copySnippet(id) {
+            const codeText = document.getElementById(id).textContent;
+            navigator.clipboard.writeText(codeText).then(() => {
+                showToast("Snippet copied successfully!");
+            }).catch(() => {
+                const dummy = document.createElement("textarea");
+                document.body.appendChild(dummy);
+                dummy.value = codeText;
+                dummy.select();
+                document.execCommand("copy");
+                document.body.removeChild(dummy);
+                showToast("Snippet copied successfully!");
+            });
+        }
+
+        // Slider logic for Level metrics
+        function updateMaturitySlider(val) {
+            const levelTag = document.getElementById("prompt-level-tag");
+            const text = document.getElementById("m-prompt-text");
+
+            if (val == 1) {
+                levelTag.textContent = "LEVEL 1 PROMPT (Weak Keyword Splicing)";
+                text.textContent = `"Write an email to a distributor about missed targets."`;
+            } else if (val == 2) {
+                levelTag.textContent = "LEVEL 2 PROMPT (Intermediate Context Additions)";
+                text.textContent = `"Write an email to Lanka Wholesale Central about missing their Q1 targets for Ginger Biscuits by 12%. Ask them for a recovery plan."`;
+            } else if (val == 3) {
+                levelTag.textContent = "LEVEL 3 PROMPT (Master FMCG GCSE Direction)";
+                text.textContent = `"Act as a Senior Sales Director at Maliban. Draft a performance review email to Lanka Wholesale Central who missed Q1 volume targets for Maliban Ginger Biscuits by 12%. Acknowledge our strong history with them, but firmly state we need a revised market activation plan within 7 days. Keep the tone professional, urgent, yet collaborative."`;
+            }
+        }
+
+        // Custom sandbox triggers
+        function setSandboxPrompt(scenarioKey) {
+            const prompts = {
+                excel_gap: "Analyze the fact_global_sales_analysis table. Find which distributor and product category caused our single largest financial shortfall in 2025, and what was their credit status at the time?",
+                outlook_coaching: "Summarize this long email thread regarding the container customs hold at the Colombo port. Draft an urgent follow-up to our freight forwarder requesting port clearance estimations. Apply Coaching by Copilot to make the tone urgent yet professional.",
+                word_grounded: "Based on Maliban_Production_Yields_1000.csv, draft a detailed Quality Remediation Proposal. Highlight shifts led by supervisor Silva.A where machine downtime directly caused wastage KG outliers.",
+                teams_recap: "Summarize what was discussed in our last marketing budget meeting transcript. Provide a clean table tracking the action items, targets, and assigned department heads."
+            };
+
+            const selectedPrompt = prompts[scenarioKey];
+            document.getElementById("sandbox-textarea").value = selectedPrompt;
+            document.getElementById("sandbox-textarea").setAttribute("data-key", scenarioKey);
+        }
+
+        // Sandbox Simulator execution
+        function simulateCopilotResponse() {
+            const textarea = document.getElementById("sandbox-textarea");
+            const key = textarea.getAttribute("data-key") || "excel_gap";
+            const statusText = document.getElementById("simulation-status");
+            const outputBlock = document.getElementById("simulation-output");
+            const btn = document.getElementById("simulate-btn");
+
+            btn.disabled = true;
+            btn.innerHTML = `
+                <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-slate-950" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                Processing...
+            `;
+
+            let timer = 0;
+            const statuses = ["Retrieving data parameters...", "Refining contextual arrays...", "Formulating executive response..."];
+            
+            const interval = setInterval(() => {
+                statusText.textContent = statuses[timer % statuses.length];
+                timer++;
+            }, 500);
+
+            setTimeout(() => {
+                clearInterval(interval);
+                const mockOutput = simulatedAnswers[key] || {
+                    status: "Completed.",
+                    output: "🤖 COPILOT RESPONSE:\nI processed your custom input. Grounding parameters successfully matched secure tenant schemas. Format output configurations as requested."
+                };
+
+                statusText.textContent = "Analysis Complete!";
+                outputBlock.textContent = mockOutput.output;
+                
+                btn.disabled = false;
+                btn.innerHTML = "Run Live Simulation →";
+            }, 2500);
+        }
+
+        // Copy sandbox inputs
+        function copySandboxPrompt() {
+            const val = document.getElementById("sandbox-textarea").value;
+            if (!val) {
+                showToast("Select a preset scenario first!");
+                return;
+            }
+            navigator.clipboard.writeText(val).then(() => {
+                showToast("Prompt copied successfully!");
+            }).catch(() => {
+                const dummy = document.createElement("textarea");
+                document.body.appendChild(dummy);
+                dummy.value = val;
+                dummy.select();
+                document.execCommand("copy");
+                document.body.removeChild(dummy);
+                showToast("Prompt copied successfully!");
+            });
+        }
+
+        // Custom styled toast alert helper
+        function showToast(text) {
+            const toast = document.getElementById("toast");
+            const toastText = document.getElementById("toast-text");
+
+            toastText.textContent = text;
+            toast.classList.remove("translate-y-20", "opacity-0");
+            toast.classList.add("translate-y-0", "opacity-100");
+
+            setTimeout(() => {
+                toast.classList.remove("translate-y-0", "opacity-100");
+                toast.classList.add("translate-y-20", "opacity-0");
+            }, 2500);
+        }
+
+        // Multi-User active Microsoft Teams Coworker Chat Simulator (INCORPORATING VIDEO SEGMENTS 2 & 3)
+        function launchCoworkerSimulation() {
+            const container = document.getElementById("slide-interactive-area");
+            
+            // Re-render the interactive slide area with a beautiful mock Teams Group Chat
+            container.innerHTML = `
+                <div class="flex flex-col h-[320px] bg-teamsChatBg rounded-2xl overflow-hidden border border-slate-300 shadow-inner">
+                    <!-- Teams Header -->
+                    <div class="bg-teamsPurple text-white p-2 flex items-center justify-between px-3">
+                        <div class="flex items-center gap-1.5">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                            <span class="text-[10px] font-bold">Western Province Operations Hub</span>
+                        </div>
+                        <span class="text-[9px] text-purple-200 font-semibold uppercase tracking-wide">4-Worker OODA Loop</span>
+                    </div>
+
+                    <!-- Teams Scroll Area -->
+                    <div id="teams-chat-messages" class="flex-grow p-2.5 overflow-y-auto scrollbar-thin space-y-2 text-[10px]">
+                        
+                        <!-- Msg 1 -->
+                        <div class="bg-white p-2 rounded-lg border shadow-sm max-w-[85%]">
+                            <span class="font-extrabold text-blue-700 block text-[9px]">Perera.D (Shift Supervisor)</span>
+                            <span class="text-slate-600 block mt-0.5">"Warning: Line_01_Ratmalana is down with a conveyor belt snap. Estimated repair time is 75 minutes."</span>
+                        </div>
+
+                        <!-- Msg 2 -->
+                        <div class="bg-white p-2 rounded-lg border shadow-sm max-w-[85%]">
+                            <span class="font-extrabold text-teal-700 block text-[9px]">Silva.A (Plant Manager)</span>
+                            <span class="text-slate-600 block mt-0.5">"That pauses our main Smart Cream Cracker line. Wastage index is going to surge on restart."</span>
+                        </div>
+
+                        <!-- Msg 3 (Autonomous Coworker executing OODA + 4 Workers) -->
+                        <div id="coworker-msg-trigger" class="hidden bg-purple-50 p-2.5 rounded-lg border border-purple-200 shadow-md max-w-[95%] ml-auto border-l-4 border-l-purple-600">
+                            <div class="flex items-center justify-between border-b border-purple-100 pb-1 mb-1">
+                                <span class="font-bold text-purple-800 text-[10px] flex items-center gap-1">
+                                    <span class="w-1.5 h-1.5 bg-purple-600 rounded-full animate-ping"></span>
+                                    🤖 Copilot Coworker (Active Hired Driver Agent)
+                                </span>
+                                <span class="text-[8px] text-purple-400 font-mono">Running OODA Loop</span>
+                            </div>
+                            
+                            <!-- 4 Workers Visualization -->
+                            <div class="space-y-1.5 text-slate-700">
+                                <p class="font-bold text-slate-800 text-[11px] border-b border-purple-100 pb-0.5">⚡ AUTONOMOUS RE-ROUTING ACTION COMPLETED:</p>
+                                <p class="leading-relaxed text-slate-600">
+                                    🔍 <strong>[Observe - Analyst]:</strong> Conveyor snap triggers line downtime anomaly (>60 mins). Scans 'fact_production_yields' and correlates similar historical events (avg. wastage increases by <strong>35.4 KG</strong>).<br>
+                                    🧭 <strong>[Orient - Planner]:</strong> Checks distributor priority index from sales CSV. Flags <strong>DIST-901 Lanka Wholesale Central</strong>. They are currently in 'Review' status with LKR 1.5 Million revenue gap in savoury crackers.<br>
+                                    ⚙️ <strong>[Decide - Operator]:</strong> Formulates plan. Initiates hot-swap order: reroutes 200 batches from Line_03_Ratmalana buffer stocks to fulfill DIST-901's imminent modern trade order.<br>
+                                    ✅ <strong>[Act - Auditor]:</strong> Audits the transfer. Checks that no outstanding balance limits were breached, maps tasks, and sends draft brief to @Silva.A.
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Input trigger mimicking prompt -->
+                    <div class="bg-slate-100 p-2 border-t flex items-center justify-between gap-2">
+                        <span class="text-[8px] text-slate-400 italic">Self-directing loop active.</span>
+                        <button onclick="triggerTeamsCoworker()" id="teams-trigger-btn" class="bg-purple-700 text-white font-bold text-[9px] px-3.5 py-1.5 rounded-lg hover:bg-purple-850 transition-all shadow">
+                            Simulate Channel Outage
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Live ARR Score Calculator Logic
+        function runArrEvaluation() {
+            const autonomous = document.getElementById("arr-autonomous").checked;
+            const recurring = document.getElementById("arr-recurring").checked;
+            const reviewable = document.getElementById("arr-reviewable").checked;
+
+            const box = document.getElementById("arr-output-box");
+            const status = document.getElementById("arr-result-status");
+            const desc = document.getElementById("arr-result-desc");
+
+            let score = 0;
+            if (autonomous) score++;
+            if (recurring) score++;
+            if (reviewable) score++;
+
+            box.className = "mt-4 p-3 rounded-xl text-center transition-all duration-350 ";
+
+            if (score === 0) {
+                box.classList.add("bg-slate-100");
+                status.className = "text-sm font-black text-slate-700 mt-1";
+                status.textContent = "0 / 3 Elements Selected";
+                desc.textContent = "Select tasks above to test.";
+            } else if (score < 3) {
+                box.classList.add("bg-blue-50", "border", "border-blue-100");
+                status.className = "text-sm font-black text-blue-800 mt-1";
+                status.textContent = "PROMPT Candidate (Score: " + score + "/3)";
+                desc.innerHTML = "<strong>Task lacks full Agent criteria:</strong> Best executed as a high-context <strong>GCSE Prompt</strong>. It requires live human judgment or does not recur frequently.";
+            } else {
+                box.classList.add("bg-emerald-50", "border", "border-emerald-200");
+                status.className = "text-sm font-black text-emerald-800 mt-1";
+                status.textContent = "AGENT Candidate (Score: 3/3)";
+                desc.innerHTML = "<strong>Hired Driver Category:</strong> Perfect for an autonomous agent! Schedule a recurring loop. Define your Goal, Proof, and Steps clearly (GPS Check) and let Copilot run it.";
+            }
+        }
+
+        // Interactive GPS Check Modal Pop-up (INCORPORATING VIDEO SEGMENT 3)
+        function openGPSModal() {
+            const modalHtml = `
+                <div id="gps-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+                    <div class="bg-white rounded-3xl max-w-md w-full shadow-2xl overflow-hidden border border-slate-200">
+                        <div class="bg-slate-900 text-white p-4 flex justify-between items-center px-6 border-b border-slate-800">
+                            <span class="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
+                                <svg class="w-4 h-4 text-malibanGold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                The Agent GPS Quality Validation Check
+                            </span>
+                            <button onclick="closeGPSModal()" class="text-slate-400 hover:text-white text-sm font-bold">✕</button>
+                        </div>
+                        <div class="p-6 space-y-4">
+                            <p class="text-xs text-slate-500 leading-relaxed">
+                                Before automating any task with an agent, run a **GPS Check**. If any block is vague, the agent will formalize and multiply bad decisions with absolute confidence!
+                            </p>
+                            <div class="space-y-3">
+                                <!-- Goal Check -->
+                                <div class="p-3 border rounded-xl bg-slate-50 flex items-start gap-3">
+                                    <input type="checkbox" id="gps-g" onchange="calcGPSScore()" class="mt-1 rounded text-malibanBlue focus:ring-malibanBlue w-4 h-4">
+                                    <div>
+                                        <h4 class="text-xs font-bold text-slate-800">Goal Integration</h4>
+                                        <p class="text-[10px] text-slate-500 leading-snug">Can I state the single-sentence strategic goal with clear precision?</p>
+                                    </div>
+                                </div>
+                                <!-- Proof Check -->
+                                <div class="p-3 border rounded-xl bg-slate-50 flex items-start gap-3">
+                                    <input type="checkbox" id="gps-p" onchange="calcGPSScore()" class="mt-1 rounded text-malibanBlue focus:ring-malibanBlue w-4 h-4">
+                                    <div>
+                                        <h4 class="text-xs font-bold text-slate-800">Proof Benchmark</h4>
+                                        <p class="text-[10px] text-slate-500 leading-snug">Do I know what "good" looks like, and can I audit the results objectively?</p>
+                                    </div>
+                                </div>
+                                <!-- Steps Check -->
+                                <div class="p-3 border rounded-xl bg-slate-50 flex items-start gap-3">
+                                    <input type="checkbox" id="gps-s" onchange="calcGPSScore()" class="mt-1 rounded text-malibanBlue focus:ring-malibanBlue w-4 h-4">
+                                    <div>
+                                        <h4 class="text-xs font-bold text-slate-800">Step Clarity</h4>
+                                        <p class="text-[10px] text-slate-500 leading-snug">Can I describe every single sub-step without abstract handwaving?</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Score Status Output -->
+                            <div id="gps-feedback-box" class="p-3 rounded-xl text-center text-xs font-bold bg-slate-100 text-slate-600">
+                                Score: 0/3 - Check variables above to start validation.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            const div = document.createElement("div");
+            div.innerHTML = modalHtml;
+            document.body.appendChild(div);
+        }
+
+        function closeGPSModal() {
+            const modal = document.getElementById("gps-modal");
+            if (modal) modal.remove();
+        }
+
+        function calcGPSScore() {
+            const g = document.getElementById("gps-g").checked;
+            const p = document.getElementById("gps-p").checked;
+            const s = document.getElementById("gps-s").checked;
+            const box = document.getElementById("gps-feedback-box");
+
+            let score = 0;
+            if (g) score++;
+            if (p) score++;
+            if (s) score++;
+
+            box.className = "p-3 rounded-xl text-center text-xs font-bold ";
+
+            if (score === 0) {
+                box.classList.add("bg-slate-100", "text-slate-600");
+                box.textContent = "Score: 0/3 - Check variables above to start validation.";
+            } else if (score < 3) {
+                box.classList.add("bg-amber-50", "text-amber-800", "border", "border-amber-200");
+                box.innerHTML = "⚠️ WARNING: Anomaly Risk (Score: " + score + "/3)<br><span class='text-[10px] font-normal block mt-1'>Vague steps will cause your agent to drive the process straight into a tree! Define your parameters clearly.</span>";
+            } else {
+                box.classList.add("bg-emerald-50", "text-emerald-800", "border", "border-emerald-200");
+                box.innerHTML = "🚀 GPS SANITY APPROVED (Score: 3/3)<br><span class='text-[10px] font-normal block mt-1'>Task definitions are mathematically robust. It is safe to delegate this to your Copilot Agent loop.</span>";
+            }
+        }
+    </script>
+</body>
+</html>
